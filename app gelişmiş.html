@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gul</title>
+</head>
+<style>
+
+</style>
+
+<body>
+    <div style="text-align: center"><textarea
+            style="height: 20px; margin: auto;width: 50%;padding: 10px;text-align: justify;" id="text"></textarea></br>
+        <button onclick='AddText()'>Yazdır</button>
+        <select id="hiz" onchange="AddText()">
+            <option value="0.10">Saniyede 10 Kelime</option>
+            <option value="0.15">Saniyede 6 Kelime</option>
+            <option value="0.2">Saniyede 5 Kelime</option>
+            <option value="0.25">Saniyede 4 Kelime</option>
+            <option value="0.375">Saniyede 3,5 Kelime</option>
+            <option value="0.5">Saniyede 3 Kelime</option>
+            <option value="0.75">Saniyede 2 Kelime</option>
+            <option value="1">Saniyede 1 Kelime</option>
+        </select>
+        <button onclick='BlackText()'>Başla</button></br>
+        <div class="slidecontainer">
+            Yazı Boyutu <span id="yb">20</span>px <input type="range" min="10" max="60" value="20" class="slider" id="myRange" onchange="AddText()">
+          </div>
+    </br>
+        Kelime Sayısı: <span id="ks"> 0</span>
+
+        <hr>
+        
+    </div>
+
+    <p style="text-align: center;" id="demo"></p>
+    <script>
+        let AreaDOM = document.getElementById('text')
+        let TextDOM = document.getElementById('demo')
+        let ybDOM = document.getElementById('yb')
+        let ksDOM = document.getElementById('ks')
+        let timer
+        let spl
+        let sizeDOM=document.getElementById('myRange')
+
+        async function AddText() {
+
+            ybDOM.innerHTML=sizeDOM.value
+            TextDOM.innerHTML = ""
+            spl = AreaDOM.value.split(" ")
+            let i=0
+            ks.innerHTML = spl.length
+
+           for (i = 0; i < spl.length; i++) {
+               TextDOM.innerHTML +=await `<span style="font-size:${sizeDOM.value}px;background: black;border: 1px black solid;border-radius: 5px;" id="cls${i}">${spl[i]} </span> `
+
+           }
+            
+
+            clearInterval(timer)
+        }
+        function BlackText() {
+            let hiz = document.getElementById('hiz')
+            i = 0
+            timer = setInterval(() => {
+                document.getElementById(`cls${i}`).style.backgroundColor = 'white'
+                document.getElementById(`cls${i}`).style.border ="1px white solid"
+                i++
+                if (i == spl.length) {
+                    clearInterval(timer)
+
+
+                }
+            }, hiz.value * 1000)
+        }
+    </script>
+</body>
+
+</html>
